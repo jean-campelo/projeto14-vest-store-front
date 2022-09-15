@@ -5,10 +5,8 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import logo from "./../assets/logo.png";
-/* import { ThreeDots } from "react-loader-spinner"; */
 
 export default function Signin() {
-
   const navigate = useNavigate();
 
   const URL = "http://localhost:5000/sign-in";
@@ -73,13 +71,8 @@ export default function Signin() {
           placeholder="Senha"
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
-        {/* {loading ? ( */}
-          <Button>
-            <ThreeDots color="#EE2B7A" heigth="72px" width="72px" />
-          </Button>
-        {/* ) : (
-          <Button type="submit">Entrar</Button>
-        )} */}
+
+        <Button type="submit">Entrar</Button>
       </form>
       <Link to="/sign-up" style={{ textDecoration: "none" }}>
         <TextLink to="/sign-in">Não tem uma conta? Crie agora!</TextLink>
