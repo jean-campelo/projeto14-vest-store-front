@@ -5,6 +5,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import logo from "./../assets/logo.png";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -17,8 +18,8 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [image, setImage] = useState("");
   const [passawordMatch, setPasswordMatch] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function samePassword(e) {
     e.preventDefault();
@@ -33,17 +34,25 @@ export default function Signup() {
   }
 
   function createRecord() {
+    const body = {
+      name,
+      email,
+      password,
+    };
+
     axios
-      .post(URL, { name, email, password })
+      .post(URL, body)
       .then((res) => {
         setUser(res.data);
         alert("Cadastro realizado com sucesso");
+        setLoading(true);
         navigate("/sign-in");
       })
       .catch((err) => {
         console.log(err);
         alert("Erro ao cadastrar");
         setPasswordMatch(false);
+        setLoading(false);
       });
   }
 
@@ -51,7 +60,9 @@ export default function Signup() {
     <MainContainer>
       <Arrow>
         <Link to="/sign-in">
-          <AiOutlineArrowLeft style={{ width: "25px", height: "25px" }} />
+          <AiOutlineArrowLeft
+            style={{ width: "25px", height: "25px", color: "black" }}
+          />
         </Link>
       </Arrow>
       <ImageLogo src={logo} alt="logo" />
@@ -81,7 +92,13 @@ export default function Signup() {
           placeholder="Confirme a senha"
           onChange={(e) => setConfirmPassword(e.target.value)}
         ></Input>
-        <Button type="submit">Cadastrar</Button>
+        {loading ? (
+          <Button>
+            <ThreeDots color="#EE2B7A" heigth="70px" width="70px" />
+          </Button>
+        ) : (
+          <Button type="submit">Cadastrar</Button>
+        )}
       </form>
       <Link to="/sign-in" style={{ textDecoration: "none" }}>
         <TextLink to="/sign-in">Já tem uma conta? Entre agora!</TextLink>
@@ -101,8 +118,8 @@ const MainContainer = styled.div`
 `;
 
 const ImageLogo = styled.img`
-  width: 40%;
-  height: 20%;
+  width: 150px;
+  height: 150px;
   margin: 10px auto;
   display: block;
 `;
@@ -119,7 +136,7 @@ const Input = styled.input`
   box-sizing: border-box;
   width: 320px;
   height: 3rem;
-  background-color: #fafafa;
+  background-color: #f8f6f8;
   margin: 10px auto;
   display: block;
   border: none;
@@ -142,6 +159,12 @@ const Button = styled.button`
   color: #fff;
   letter-spacing: 0.2rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:disabled {
+    opacity: 0.5;
+  }
 `;
 
 const TextLink = styled.p`
@@ -152,11 +175,25 @@ const TextLink = styled.p`
   letter-spacing: 0.2rem;
   margin-top: 20px;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
 `;
 
 const Arrow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height:28px;
+  border-radius: 50%;
+  
   position: fixed;
   top: 52px;
   left: 40px;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
+  }
 `;
