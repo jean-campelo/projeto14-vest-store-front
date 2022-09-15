@@ -75,7 +75,7 @@ export default function Signin() {
         ></Input>
         {loading ? (
           <Button>
-            <ThreeDots color="#EE2B7A" heigth="70px" width="70px" />
+            <ThreeDots color="#EE2B7A" heigth="72px" width="72px" />
           </Button>
         ) : (
           <Button type="submit">Entrar</Button>
