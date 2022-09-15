@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -7,35 +7,27 @@ import UserContext from "../contexts/UserContext";
 import logo from "./../assets/logo.png";
 import { ThreeDots } from "react-loader-spinner";
 
-export default function Signup() {
+export default function Signin() {
+
   const navigate = useNavigate();
 
-  const URL = "http://localhost:5000/sign-up";
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passawordMatch, setPasswordMatch] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const URL = "http://localhost:5000/sign-in";
 
   const { userInformation, setUserInformation } = useContext(UserContext);
 
-  function samePassword(e) {
-    e.preventDefault();
-    setPasswordMatch(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    if (password === confirmPassword) {
-      createRecord();
-    } else {
-      setPasswordMatch(false);
-      alert("Senhas não conferem");
-    }
+  function lockValidation(e) {
+    e.preventDefault();
+    setDisabled(true);
+    validateLogin();
   }
 
-  function createRecord() {
+  function validateLogin() {
     const body = {
-      name,
       email,
       password,
     };
@@ -43,15 +35,16 @@ export default function Signup() {
     axios
       .post(URL, body)
       .then((res) => {
-        userInformation(res.data);
-        alert("Cadastro realizado com sucesso");
-        setLoading(true);
-        navigate("/sign-in");
+        setUserInformation(res.data);
+        alert("Login realizado com sucesso");
+        console.log(res.data);
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err);
-        alert("Erro ao cadastrar");
-        setPasswordMatch(false);
+
+        alert("Erro ao logar");
+        setDisabled(false);
         setLoading(false);
       });
   }
@@ -59,21 +52,15 @@ export default function Signup() {
   return (
     <MainContainer>
       <Arrow>
-        <Link to="/sign-in">
+        <Link to="/sign-up">
           <AiOutlineArrowLeft
             style={{ width: "25px", height: "25px", color: "black" }}
           />
         </Link>
       </Arrow>
       <ImageLogo src={logo} alt="logo" />
-      <Text>Crie sua conta</Text>
-      <form onSubmit={samePassword}>
-        <Input
-          required
-          type="text"
-          placeholder="Nome"
-          onChange={(e) => setName(e.target.value)}
-        ></Input>
+      <Text>Faça seu login</Text>
+      <form onSubmit={lockValidation}>
         <Input
           required
           type="email"
@@ -86,22 +73,16 @@ export default function Signup() {
           placeholder="Senha"
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
-        <Input
-          required
-          type="password"
-          placeholder="Confirme a senha"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        ></Input>
         {loading ? (
           <Button>
             <ThreeDots color="#EE2B7A" heigth="70px" width="70px" />
           </Button>
         ) : (
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit">Entrar</Button>
         )}
       </form>
-      <Link to="/sign-in" style={{ textDecoration: "none" }}>
-        <TextLink to="/sign-in">Já tem uma conta? Entre agora!</TextLink>
+      <Link to="/sign-up" style={{ textDecoration: "none" }}>
+        <TextLink to="/sign-in">Não tem uma conta? Crie agora!</TextLink>
       </Link>
     </MainContainer>
   );
@@ -137,7 +118,7 @@ const ImageLogo = styled.img`
 `;
 
 const Text = styled.h2`
-  margin-top: 170px;
+  margin-top: 160px;
   color: #2b2b2b;
   font-size: 2rem;
   font-family: "Outfit", sans-serif;
