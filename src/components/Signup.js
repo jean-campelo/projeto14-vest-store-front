@@ -115,6 +115,15 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: fadein 1s;
+  
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
 `;
 
 const ImageLogo = styled.img`
