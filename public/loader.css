@@ -38,10 +38,10 @@ html, body, #root, main {
 .logo {
 	width: 150px;
 	height: 150px;
-	animation: loader 1s ease-in-out;
+	animation: logo 1s ease-in-out;
 }
 
-@keyframes loader {
+@keyframes logo {
 	0% {
 
 		width: 0;
@@ -65,7 +65,7 @@ html, body, #root, main {
 
 .loader {
 	position: fixed;
-	bottom: 30px;
+	bottom: 46px;
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
@@ -76,10 +76,11 @@ html, body, #root, main {
 
 @keyframes spin {
 	0% {
-	
+		opacity: 0.5;
 		transform: rotate(0deg);
 	}
 	100% {
+		opacity: 0.5;
 		transform: rotate(360deg);
 	}
 }
