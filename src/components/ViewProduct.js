@@ -40,6 +40,10 @@ export default function ViewProduct() {
             <button onClick={()=>setQtd(qtd+1)}> + </button>
             </div>
           </Quantity>
+          <Price>
+            <h1> R$ {(product.price/100).toFixed(2)} </h1>
+            <button> Adicionar ao carrinho </button>
+          </Price>
         </AddCart>
       </Product>
     </Container>
@@ -152,5 +156,26 @@ const Quantity = styled.div`
     height: 30px;
     border: none;
     }
+`;
 
+const Price = styled.div`
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    h1 {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    button {
+        background-color: #02ac66;
+        width: 200px;
+        height: 40px;
+        border: 1px solid #02ac66;
+        border-radius: 50px;
+        color: #fff;
+
+    }
 `;

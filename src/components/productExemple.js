@@ -6,7 +6,7 @@ const product =
       qtd: 12,
       color: "preto",
       department: "tênis",
-      price: 7500,
+      price: 7525,
       gender: "feminino",
       image: "https://imgnike-a.akamaihd.net/1300x1300/013635ID.jpg",
     }
