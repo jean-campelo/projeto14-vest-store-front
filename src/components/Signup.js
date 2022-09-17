@@ -59,7 +59,9 @@ export default function Signup() {
     }
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
+    
     const body = {
       name,
       email,

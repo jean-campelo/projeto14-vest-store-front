@@ -5,6 +5,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import logo from "./../assets/logo.png";
+import { BsFillExclamationTriangleFill, BsCheckCircleFill } from "react-icons/bs";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -17,34 +18,83 @@ export default function Signin() {
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [requestMessage, setRequestMessage] = useState({});
 
-  function lockValidation(e) {
+  
+  function handleSubmit(e) {
     e.preventDefault();
-    setDisabled(true);
-    validateLogin();
-  }
 
-  function validateLogin() {
+    const lowerCaseEmail = email.toLowerCase()
+
+
     const body = {
-      email,
+      email: lowerCaseEmail,
       password,
     };
 
     axios
       .post(URL, body)
       .then((res) => {
+        setRequestMessage(res)
         setUserInformation(res.data);
         alert("Login realizado com sucesso");
         console.log(res.data);
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err);
-
-        alert("Erro ao logar");
+        setRequestMessage(err)
         setDisabled(false);
         setLoading(false);
       });
+  }
+
+  function setErrorContainerContent() {
+    let errorMessage = ""
+
+    switch (requestMessage.response?.status) {
+        case 0:
+            errorMessage = "Erro ao logar. Por favor, tente novamente mais tarde"
+            break
+        case 401:
+            errorMessage = "Email ou senha incorreta"
+            break
+        case 422:
+            errorMessage = "Por favor, preencha os campos corretamente"
+            break
+        case 500:
+            errorMessage = "Tente novamente mais tarde"
+            break
+        default:
+            break
+    }
+    return errorMessage.length > 0 ? (
+        <ErrorMessage>
+            <BsFillExclamationTriangleFill /> {errorMessage}
+        </ErrorMessage>
+    ) : (
+        <></>
+    )
+}
+
+  function setSuccessContainerContent() {
+    let successMessage = ""
+
+        switch (requestMessage?.status) {
+            case 200:
+            case 201:
+                successMessage =
+                    "Success! You'll be redirected back to the store now."
+                break
+            default:
+                break
+        }
+        return successMessage.length > 0 ? (
+            <SuccessMessage>
+                <BsCheckCircleFill /> {successMessage}
+            </SuccessMessage>
+        ) : (
+            <></>
+        )
   }
 
   return (
@@ -58,7 +108,7 @@ export default function Signin() {
       </Arrow>
       <ImageLogo src={logo} alt="logo" />
       <Text>Faça seu login</Text>
-      <form onSubmit={lockValidation}>
+      <form onSubmit={handleSubmit}>
         <Input
           required
           type="email"
@@ -71,7 +121,8 @@ export default function Signin() {
           placeholder="Senha"
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
-
+          {setErrorContainerContent()}
+          {setSuccessContainerContent()}
         <Button type="submit">Entrar</Button>
       </form>
       <Link to="/sign-up" style={{ textDecoration: "none" }}>
@@ -82,7 +133,7 @@ export default function Signin() {
 }
 
 const MainContainer = styled.div`
-  width: 100%;
+  width: 100%; 
   height: 100vh;
   background-color: #fff;
   display: flex;
@@ -138,7 +189,7 @@ const Button = styled.button`
   width: 320px;
   height: 3rem;
   background-color: #2b2b2b;
-  margin-top: 40px;
+  margin: 40px 30px 0 30px;
   border: none;
   border-radius: 20px;
   font-size: 1rem;
@@ -184,3 +235,33 @@ const Arrow = styled.div`
     transition: 0.2s;
   }
 `;
+
+const ErrorMessage = styled.p`
+  color: #ff0000;
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  text-align: center; 
+  animation: slide 1s; 
+  @keyframes slide {
+    from {
+      opacity: 0; 
+    }
+    to {   
+      opacity: 1;
+    }
+`
+
+const SuccessMessage = styled.p`
+  color: #00ff00;
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  text-align: center;
+  animation: slide 1s;
+  @keyframes slide {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+`
