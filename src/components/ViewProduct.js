@@ -44,9 +44,14 @@ const Container = styled.div`
 const Product = styled.div`
   display: flex;
   flex-direction: column;
+  width: 96vw;
+  display: flex;
+  align-items: center;
 
   img {
-    height: 45vh;
+    width: 400px;
+    height: 400px;
+    object-fit: fill;
   }
 `;
 
