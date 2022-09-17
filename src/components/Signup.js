@@ -117,7 +117,7 @@ const MainContainer = styled.div`
     }
     to {
       opacity: 1;
-    }
+    }}
 `;
 
 const ImageLogo = styled.img`
@@ -185,7 +185,7 @@ const TextLink = styled.p`
 
   &:hover {
     transform: scale(1.01);
-`;
+  }`;
 
 const Arrow = styled.div`
   display: flex;

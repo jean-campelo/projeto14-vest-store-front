@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import { useState } from "react";
 import product from "./productExemple.js";
 
 export default function ViewProduct() {
+  const [qtd, setQtd] = useState(0);
+
   return (
     <Container>
       <Product>
@@ -28,6 +31,16 @@ export default function ViewProduct() {
             </Color>
           </ContainerSizeAndColor>
         </Informations>
+        <AddCart>
+          <Quantity>
+            <h2>Quantidade</h2>
+            <div>
+            <button onClick={()=>qtd > 0 ? setQtd(qtd-1) : setQtd(0)}> - </button>
+            <h3> {qtd} </h3>
+            <button onClick={()=>setQtd(qtd+1)}> + </button>
+            </div>
+          </Quantity>
+        </AddCart>
       </Product>
     </Container>
   );
@@ -102,4 +115,42 @@ const Color = styled.div`
 
 const ContainerSizeAndColor = styled.div`
   display: flex;
+`;
+
+const AddCart = styled.div`
+  font-family: "Outfit", sans-serif;
+  width: 90vw;
+`;
+
+const Quantity = styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+  h2 {
+    font-size: 16px;
+  }
+
+  h3 {
+    font-weight: 400;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    width: 100px;
+    margin-left: 40px;
+
+  }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    }
+
 `;
