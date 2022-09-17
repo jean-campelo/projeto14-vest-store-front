@@ -189,7 +189,7 @@ const Button = styled.button`
   width: 320px;
   height: 3rem;
   background-color: #2b2b2b;
-  margin: 40px 30px 0 30px;
+  margin: auto;
   border: none;
   border-radius: 20px;
   font-size: 1rem;
