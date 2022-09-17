@@ -20,7 +20,7 @@ export default function ViewProduct() {
               <h2> Tamanhos </h2>
               <div>
                 {product.sizes.map((value) => (
-                  <div className="details">{value}</div>
+                  <Details qtd={value.qtd}>{value.number}</Details>
                 ))}
               </div>
             </Sizes>
@@ -35,13 +35,16 @@ export default function ViewProduct() {
           <Quantity>
             <h2>Quantidade</h2>
             <div>
-            <button onClick={()=>qtd > 0 ? setQtd(qtd-1) : setQtd(0)}> - </button>
-            <h3> {qtd} </h3>
-            <button onClick={()=>setQtd(qtd+1)}> + </button>
+              <button onClick={() => (qtd > 0 ? setQtd(qtd - 1) : setQtd(0))}>
+                {" "}
+                -{" "}
+              </button>
+              <h3> {qtd} </h3>
+              <button onClick={() => setQtd(qtd + 1)}> + </button>
             </div>
           </Quantity>
           <Price>
-            <h1> R$ {(product.price/100).toFixed(2)} </h1>
+            <h1> R$ {(product.price / 100).toFixed(2)} </h1>
             <button> Adicionar ao carrinho </button>
           </Price>
         </AddCart>
@@ -99,18 +102,20 @@ const Sizes = styled.div`
     display: flex;
   }
 
-  .details {
+`;
+
+const Details = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4b4b4c;
+    color: ${(props) => props.qtd > 0 ? "#4b4b4c" : "#999"};
     width: 24px;
     height: 24px;
-    border: 1px solid #4b4b4c;
+    border: 1px solid ${(props) => props.qtd > 0 ? "#4b4b4c" : "#ccc"};
     border-radius: 50px;
     margin-right: 8px;
     font-size: 12px;
-  }
+    background-color: ${(props) => props.qtd > 0 ? "#fff" : "#ccc"};
 `;
 
 const Color = styled.div`
