@@ -5,7 +5,10 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import logo from "./../assets/logo.png";
-/* import { ThreeDots } from "react-loader-spinner"; */
+import {
+  BsCheckCircleFill,
+  BsFillExclamationTriangleFill,
+} from "react-icons/bs";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -17,23 +20,48 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passawordMatch, setPasswordMatch] = useState(false);
+  const [trackingPassword, setTrackingPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { userInformation, setUserInformation } = useContext(UserContext);
 
-  function samePassword(e) {
-    e.preventDefault();
-    setPasswordMatch(true);
-
-    if (password === confirmPassword) {
-      createRecord();
-    } else {
-      setPasswordMatch(false);
-      alert("Senhas não conferem");
+  function startTrackingPassword(e) {
+    if (e.target.name === "password") {
+      setPassword(e.target.value);
+      if (e.target.value === confirmPassword) setPasswordMatch(true);
+      else setPasswordMatch(false);
+    }
+    if (e.target.name === "password-confirmation") {
+      setConfirmPassword(e.target.value);
+      e.target.value.length > 0
+        ? setTrackingPassword(true)
+        : setTrackingPassword(false);
+      if (e.target.value === password) setPasswordMatch(true);
+      else setPasswordMatch(false);
     }
   }
 
-  function createRecord() {
+  function samePassword() {
+    if (trackingPassword && passawordMatch) {
+      return (
+        <MessagePasswordCorrect>
+          <BsCheckCircleFill /> Senhas iguais
+        </MessagePasswordCorrect>
+      );
+    } else if (trackingPassword && !passawordMatch) {
+      return (
+        <MessagePassword>
+          <BsFillExclamationTriangleFill /> Senhas diferentes.
+        </MessagePassword>
+      );
+    } else {
+      return <></>;
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    
     const body = {
       name,
       email,
@@ -56,6 +84,10 @@ export default function Signup() {
       });
   }
 
+  function setButtonDisabled() {
+    return !name || !email || !passawordMatch ? true : false;
+  }
+
   return (
     <MainContainer>
       <Arrow>
@@ -67,7 +99,7 @@ export default function Signup() {
       </Arrow>
       <ImageLogo src={logo} alt="logo" />
       <Text>Crie sua conta</Text>
-      <form onSubmit={samePassword}>
+      <form onSubmit={handleSubmit}>
         <Input
           required
           type="text"
@@ -83,16 +115,21 @@ export default function Signup() {
         <Input
           required
           type="password"
+          name="password"
           placeholder="Senha"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => startTrackingPassword(e)}
         ></Input>
         <Input
           required
           type="password"
+          name="password-confirmation"
           placeholder="Confirme a senha"
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={(e) => startTrackingPassword(e)}
         ></Input>
-        <Button type="submit">Cadastrar</Button>
+        {samePassword()}
+        <Button type="submit" disabled={setButtonDisabled()}>
+          Cadastrar
+        </Button>
       </form>
       <Link to="/sign-in" style={{ textDecoration: "none" }}>
         <TextLink to="/sign-in">Já tem uma conta? Entre agora!</TextLink>
@@ -203,4 +240,22 @@ const Arrow = styled.div`
     transform: scale(1.1);
     transition: 0.2s;
   }
+`;
+
+const MessagePassword = styled.p`
+  color: red;
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  text-align: center;
+  letter-spacing: 0.2rem;
+  margin-top: 20px;
+`;
+
+const MessagePasswordCorrect = styled.p`
+  color: green;
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  text-align: center;
+  letter-spacing: 0.2rem;
+  margin-top: 20px;
 `;
