@@ -6,6 +6,7 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 
 import UserContext from "./contexts/UserContext";
+import ViewProduct from "./components/ViewProduct";
 
 function App() {
   const [user, setUser] = useState({
@@ -27,6 +28,7 @@ function App() {
         <Route path="/contact" element={<Contact />} /> */}
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
+          <Route path="/view-product" element={<ViewProduct />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
