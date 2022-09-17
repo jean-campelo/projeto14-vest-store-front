@@ -11,14 +11,22 @@ export default function ViewProduct() {
           <h1> {product.name} </h1>
           <h2>Descrição</h2>
           <h3> {product.description} </h3>
-          <Sizes>
-            <h2> Tamanhos </h2>
-            <div>
-              {product.sizes.map((value) => (
-                <div className="details">{value}</div>
-              ))}
-            </div>
-          </Sizes>
+
+          <ContainerSizeAndColor>
+            <Sizes>
+              <h2> Tamanhos </h2>
+              <div>
+                {product.sizes.map((value) => (
+                  <div className="details">{value}</div>
+                ))}
+              </div>
+            </Sizes>
+
+            <Color>
+              <h2> Cor </h2>
+              {product.color}
+            </Color>
+          </ContainerSizeAndColor>
         </Informations>
       </Product>
     </Container>
@@ -63,6 +71,8 @@ const Informations = styled.div`
 `;
 
 const Sizes = styled.div`
+  width: 60%;
+
   div {
     display: flex;
   }
@@ -79,4 +89,12 @@ const Sizes = styled.div`
     margin-right: 8px;
     font-size: 12px;
   }
+`;
+
+const Color = styled.div`
+  margin-left: 16px;
+`;
+
+const ContainerSizeAndColor = styled.div`
+  display: flex;
 `;
