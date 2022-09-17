@@ -4,6 +4,8 @@ import GlobalStyle from "./GlobalStyle/GlobalStyle";
 import LoadingPage from "./components/LoagindPage";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import Home from "./components/Home";
+import Selections from "./components/Home/Selections";
 
 import UserContext from "./contexts/UserContext";
 
@@ -19,7 +21,7 @@ function App() {
 
   return (
     <UserContext.Provider value={userInformation}>
-      <GlobalStyle/>
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoadingPage />} />
@@ -27,6 +29,8 @@ function App() {
         <Route path="/contact" element={<Contact />} /> */}
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/category" element={<Selections />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
