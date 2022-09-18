@@ -5,7 +5,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
 import logo from "./../assets/logo.png";
+<<<<<<< HEAD
 /* import { ThreeDots } from "react-loader-spinner"; */
+=======
+import {
+  BsCheckCircleFill,
+  BsFillExclamationTriangleFill,
+} from "react-icons/bs";
+>>>>>>> main
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -17,10 +24,15 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passawordMatch, setPasswordMatch] = useState(false);
+<<<<<<< HEAD
+=======
+  const [trackingPassword, setTrackingPassword] = useState(false);
+>>>>>>> main
   const [loading, setLoading] = useState(false);
 
   const { userInformation, setUserInformation } = useContext(UserContext);
 
+<<<<<<< HEAD
   function samePassword(e) {
     e.preventDefault();
     setPasswordMatch(true);
@@ -34,6 +46,45 @@ export default function Signup() {
   }
 
   function createRecord() {
+=======
+  function startTrackingPassword(e) {
+    if (e.target.name === "password") {
+      setPassword(e.target.value);
+      if (e.target.value === confirmPassword) setPasswordMatch(true);
+      else setPasswordMatch(false);
+    }
+    if (e.target.name === "password-confirmation") {
+      setConfirmPassword(e.target.value);
+      e.target.value.length > 0
+        ? setTrackingPassword(true)
+        : setTrackingPassword(false);
+      if (e.target.value === password) setPasswordMatch(true);
+      else setPasswordMatch(false);
+    }
+  }
+
+  function samePassword() {
+    if (trackingPassword && passawordMatch) {
+      return (
+        <MessagePasswordCorrect>
+          <BsCheckCircleFill /> Senhas iguais
+        </MessagePasswordCorrect>
+      );
+    } else if (trackingPassword && !passawordMatch) {
+      return (
+        <MessagePassword>
+          <BsFillExclamationTriangleFill /> Senhas diferentes.
+        </MessagePassword>
+      );
+    } else {
+      return <></>;
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    
+>>>>>>> main
     const body = {
       name,
       email,
@@ -56,6 +107,13 @@ export default function Signup() {
       });
   }
 
+<<<<<<< HEAD
+=======
+  function setButtonDisabled() {
+    return !name || !email || !passawordMatch ? true : false;
+  }
+
+>>>>>>> main
   return (
     <MainContainer>
       <Arrow>
@@ -67,7 +125,11 @@ export default function Signup() {
       </Arrow>
       <ImageLogo src={logo} alt="logo" />
       <Text>Crie sua conta</Text>
+<<<<<<< HEAD
       <form onSubmit={samePassword}>
+=======
+      <form onSubmit={handleSubmit}>
+>>>>>>> main
         <Input
           required
           type="text"
@@ -83,16 +145,33 @@ export default function Signup() {
         <Input
           required
           type="password"
+<<<<<<< HEAD
           placeholder="Senha"
           onChange={(e) => setPassword(e.target.value)}
+=======
+          name="password"
+          placeholder="Senha"
+          onChange={(e) => startTrackingPassword(e)}
+>>>>>>> main
         ></Input>
         <Input
           required
           type="password"
+<<<<<<< HEAD
           placeholder="Confirme a senha"
           onChange={(e) => setConfirmPassword(e.target.value)}
         ></Input>
         <Button type="submit">Cadastrar</Button>
+=======
+          name="password-confirmation"
+          placeholder="Confirme a senha"
+          onChange={(e) => startTrackingPassword(e)}
+        ></Input>
+        {samePassword()}
+        <Button type="submit" disabled={setButtonDisabled()}>
+          Cadastrar
+        </Button>
+>>>>>>> main
       </form>
       <Link to="/sign-in" style={{ textDecoration: "none" }}>
         <TextLink to="/sign-in">Já tem uma conta? Entre agora!</TextLink>
@@ -117,7 +196,11 @@ const MainContainer = styled.div`
     }
     to {
       opacity: 1;
+<<<<<<< HEAD
     }}
+=======
+    }
+>>>>>>> main
 `;
 
 const ImageLogo = styled.img`
@@ -185,7 +268,11 @@ const TextLink = styled.p`
 
   &:hover {
     transform: scale(1.01);
+<<<<<<< HEAD
   }`;
+=======
+`;
+>>>>>>> main
 
 const Arrow = styled.div`
   display: flex;
@@ -204,3 +291,24 @@ const Arrow = styled.div`
     transition: 0.2s;
   }
 `;
+<<<<<<< HEAD
+=======
+
+const MessagePassword = styled.p`
+  color: red;
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  text-align: center;
+  letter-spacing: 0.2rem;
+  margin-top: 20px;
+`;
+
+const MessagePasswordCorrect = styled.p`
+  color: green;
+  font-size: 1rem;
+  font-family: "Outfit", sans-serif;
+  text-align: center;
+  letter-spacing: 0.2rem;
+  margin-top: 20px;
+`;
+>>>>>>> main

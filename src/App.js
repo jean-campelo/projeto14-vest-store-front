@@ -6,7 +6,10 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 
 import UserContext from "./contexts/UserContext";
+<<<<<<< HEAD
 import ViewProduct from "./components/ViewProduct";
+=======
+>>>>>>> main
 
 function App() {
   const [user, setUser] = useState({
@@ -28,7 +31,10 @@ function App() {
         <Route path="/contact" element={<Contact />} /> */}
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
+<<<<<<< HEAD
           <Route path="/view-product" element={<ViewProduct />} />
+=======
+>>>>>>> main
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
