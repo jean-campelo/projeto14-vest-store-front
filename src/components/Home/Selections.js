@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -10,7 +10,9 @@ import { ArrowLeft, ShoppingCart } from "phosphor-react";
 
 import { getCategory } from '../../assets/services/request';
 
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
+
+import UserContext from '../../contexts/UserContext';
 
 const relations = [
     { name: 'camisetas', category: 'tshirt' },
@@ -23,14 +25,17 @@ export default function Selections() {
     const [title, setTitle] = useState('');
     const [products, setProducts] = useState([]);
 
+    const { user } = useContext(UserContext);
+
     const params = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (params.name) {
             // category
             const { name } = params;
             const category = relations.filter(obj => obj.name === name)[0]?.category || 'not-found';
-            getCategory(category).then(res => {
+            getCategory(category, user.token).then(res => {
                 if (category === 'not-found') {
                     setTitle(res.data.selectionTitle);
                 } else {
@@ -39,6 +44,9 @@ export default function Selections() {
                 }
             }).catch(e => {
                 console.log(e);
+                if (e.request.responseText === 'Unauthorized') {
+                    navigate('/sign-in');
+                }
             })
 
         } else {

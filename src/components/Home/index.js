@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ShoppingCart, User } from 'phosphor-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Category from './Category';
 import Product from './Product';
@@ -11,14 +11,23 @@ import { Header, HomeContainer, HomeBody, CategoriesWrapper, ProductsWrapper, Se
 
 import logo from '../../assets/logo.png'
 
+import UserContext from '../../contexts/UserContext';
+
 export default function Home() {
     const [products, setProducts] = useState([]);
 
+    const { user } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
     useEffect(() => {
-        getHome().then(res => {
+        getHome(user.token).then(res => {
             setProducts(res.data.products);
         }).catch(e => {
             console.log(e);
+            if (e.request.responseText === 'Unauthorized') {
+                navigate('/sign-in');
+            }
         })
     }, []);
 
