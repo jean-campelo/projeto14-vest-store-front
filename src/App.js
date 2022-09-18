@@ -30,7 +30,8 @@ function App() {
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/category" element={<Selections />} />
+          <Route path="/category/:name" element={<Selections />} />
+          {/* <Route path="/selection/:id" element={<Selections />} /> */}
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

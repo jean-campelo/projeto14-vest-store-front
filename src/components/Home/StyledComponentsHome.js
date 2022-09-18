@@ -10,7 +10,16 @@ const Header = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 0.7rem 1rem;
+    /* padding-top: 0.4rem; */
     
+    svg {
+        /* padding-top: 0.2rem; */
+        color: black;
+    }
+
+    img {
+        padding-bottom: 2px;
+    }
 `;
 
 const HomeContainer = styled.div`
@@ -48,9 +57,10 @@ const SectionTitle = styled.div`
     font-family: 'Nunito', sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
+    text-transform: capitalize;
 `;
 
-//====== Products ======//
+//====== Categories ======//
 
 const CategoryContainer = styled.div`
     width: 5rem;
@@ -69,6 +79,7 @@ const IconWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4);
     `;
 
 const Title = styled.div`
@@ -84,6 +95,7 @@ const ProductContainer = styled.div`
         font-family: 'Nunito', sans-serif;
         font-size: 1.2rem;
         margin: .3rem 0;
+        text-transform: capitalize;
     }
     
     span {
@@ -105,6 +117,13 @@ const ImgWrapper = styled.div`
     border-radius: 8px;
     background-color: #f0f0f0;
     cursor: pointer;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+    
+    img {
+        border-radius: 8px;
+        width: 10rem;
+        height: 10rem;
+    }
 `;
 
 
