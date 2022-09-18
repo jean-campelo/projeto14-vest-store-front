@@ -4,6 +4,7 @@ import GlobalStyle from "./GlobalStyle/GlobalStyle";
 import LoadingPage from "./components/LoagindPage";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import Cart from "./components/Cart";
 
 import UserContext from "./contexts/UserContext";
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/contact" element={<Contact />} /> */}
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
+          <Route path="/my-cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
