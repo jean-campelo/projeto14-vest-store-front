@@ -30,24 +30,23 @@ export default function ViewProduct() {
               {product.color}
             </Color>
           </ContainerSizeAndColor>
+          <AddCart>
+            <Quantity>
+              <h2>Quantidade</h2>
+              <div>
+                <button onClick={() => (qtd > 0 ? setQtd(qtd - 1) : setQtd(0))}>
+                  -
+                </button>
+                <h3> {qtd} </h3>
+                <button onClick={() => setQtd(qtd + 1)}>+</button>
+              </div>
+            </Quantity>
+            <Price>
+              <h1> R$ {(product.price / 100).toFixed(2)} </h1>
+              <button> Adicionar ao carrinho </button>
+            </Price>
+          </AddCart>
         </Informations>
-        <AddCart>
-          <Quantity>
-            <h2>Quantidade</h2>
-            <div>
-              <button onClick={() => (qtd > 0 ? setQtd(qtd - 1) : setQtd(0))}>
-                {" "}
-                -{" "}
-              </button>
-              <h3> {qtd} </h3>
-              <button onClick={() => setQtd(qtd + 1)}> + </button>
-            </div>
-          </Quantity>
-          <Price>
-            <h1> R$ {(product.price / 100).toFixed(2)} </h1>
-            <button> Adicionar ao carrinho </button>
-          </Price>
-        </AddCart>
       </Product>
     </Container>
   );
@@ -101,21 +100,22 @@ const Sizes = styled.div`
   div {
     display: flex;
   }
-
 `;
-
 const Details = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${(props) => props.qtd > 0 ? "#4b4b4c" : "#999"};
-    width: 24px;
-    height: 24px;
-    border: 1px solid ${(props) => props.qtd > 0 ? "#4b4b4c" : "#ccc"};
-    border-radius: 50px;
-    margin-right: 8px;
-    font-size: 12px;
-    background-color: ${(props) => props.qtd > 0 ? "#fff" : "#ccc"};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${(props) => (props.qtd > 0 ? "#4b4b4c" : "#999")};
+  width: 24px;
+  height: 24px;
+  border: 1px solid ${(props) => (props.qtd > 0 ? "#4b4b4c" : "#ccc")};
+  border-radius: 50px;
+  margin-right: 8px;
+  font-size: 12px;
+  background-color: ${(props) => (props.qtd > 0 ? "#fff" : "#ccc")};
+
+  //product selected
+  border: 1px solid ${(props) => (props.qtd > 0 ? "#4b4b4c" : "#ccc")};
 `;
 
 const Color = styled.div`
@@ -132,9 +132,9 @@ const AddCart = styled.div`
 `;
 
 const Quantity = styled.div`
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 
   h2 {
     font-size: 16px;
@@ -150,7 +150,6 @@ const Quantity = styled.div`
     justify-content: space-between;
     width: 100px;
     margin-left: 40px;
-
   }
   button {
     display: flex;
@@ -160,27 +159,26 @@ const Quantity = styled.div`
     width: 30px;
     height: 30px;
     border: none;
-    }
+  }
 `;
 
 const Price = styled.div`
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-    h1 {
-        font-size: 20px;
-        font-weight: 400;
-    }
+  h1 {
+    font-size: 20px;
+    font-weight: 400;
+  }
 
-    button {
-        background-color: #02ac66;
-        width: 200px;
-        height: 40px;
-        border: 1px solid #02ac66;
-        border-radius: 50px;
-        color: #fff;
-
-    }
+  button {
+    background-color: #02ac66;
+    width: 200px;
+    height: 40px;
+    border: 1px solid #02ac66;
+    border-radius: 50px;
+    color: #fff;
+  }
 `;

@@ -1,12 +1,14 @@
-const product = {
+const products = {
   name: "Nike Air Max",
   description: "Incrível tênis com absorção de impacto, ideal para caminhadas",
+
   sizes: [
     { number: 34, qtd: 5 },
-    { number: 36, qtd: 4 },
-    { number: 38, qtd: 1 },
-    { number: 40, qtd: 0 },
+    { number: 36, qtd: 3 },
+    { number: 38, qtd: 0 },
+    { number: 40, qtd: 1 },
   ],
+
   qtd: 12,
   color: "preto",
   department: "tênis",
@@ -15,4 +17,4 @@ const product = {
   image: "https://imgnike-a.akamaihd.net/1300x1300/013635ID.jpg",
 };
 
-export default product;
+export default products;
