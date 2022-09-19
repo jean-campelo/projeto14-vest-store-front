@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://vest-store.herokuapp.com/';
 
 export function getHome(token) {
     const promise = axios({
