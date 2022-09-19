@@ -5,6 +5,8 @@ import LoadingPage from "./components/LoagindPage";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Cart from "./components/Cart";
+import Home from "./components/Home";
+import Selections from "./components/Home/Selections";
 
 import UserContext from "./contexts/UserContext";
 
@@ -20,7 +22,7 @@ function App() {
 
   return (
     <UserContext.Provider value={userInformation}>
-      <GlobalStyle/>
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoadingPage />} />
@@ -29,6 +31,9 @@ function App() {
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/my-cart" element={<Cart />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/category/:name" element={<Selections />} />
+          {/* <Route path="/selection/:id" element={<Selections />} /> */}
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
