@@ -8,7 +8,7 @@ import Product from "./Product";
 import { HomeContainer, HomeBody, SectionTitle, ProductsWrapper } from "./StyledComponentsHome";
 import { ArrowLeft, ShoppingCart } from "phosphor-react";
 
-import { getCategory } from '../../assets/services/request';
+import { getCategory, getSelection } from '../../assets/services/request';
 
 import logo from '../../assets/logo.png';
 
@@ -52,6 +52,15 @@ export default function Selections() {
         } else {
             // selection
             const idSelection = params.id;
+            getSelection(idSelection, user.token).then(res => {
+                setTitle(res.data.selectionTitle);
+                setProducts(res.data.products);
+            }).catch(e => {
+                console.log(e);
+                if (e.request.responseText === 'Unauthorized') {
+                    navigate('/sign-in');
+                }
+            })
         }
     }, [])
 
@@ -74,7 +83,6 @@ export default function Selections() {
 
                 <ProductsWrapper>
                     {products.length !== 0 ? products.map(product => <Product productObj={product} />) : 'Não tem nada aqui'}
-                    {/* {products.map(product => <Product productObj={product} />)} */}
                 </ProductsWrapper>
 
             </HomeBody>

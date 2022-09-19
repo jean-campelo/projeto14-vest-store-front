@@ -23,3 +23,14 @@ export function getCategory(category, token) {
     })
     return promise;
 }
+
+export function getSelection(idSelection, token) {
+    const promise = axios({
+        method: 'get',
+        url: `${BASE_URL}/selection/${idSelection}`,
+        headers: {
+            authorization: 'Bearer ' + token,
+        },
+    })
+    return promise;
+}

@@ -31,7 +31,7 @@ function App() {
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/category/:name" element={<Selections />} />
-          {/* <Route path="/selection/:id" element={<Selections />} /> */}
+          <Route path="/selection/:id" element={<Selections />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
