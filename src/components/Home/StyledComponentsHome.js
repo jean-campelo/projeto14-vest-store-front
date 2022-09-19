@@ -60,6 +60,35 @@ const SectionTitle = styled.div`
     text-transform: capitalize;
 `;
 
+//====== Selections ======//
+
+const SelectionContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const SelectionWrapper = styled.div`
+    width: 90%;
+    height: 8rem;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1rem;
+    
+    img {
+        border-radius: 8px;
+        object-fit: cover;
+        width: 100%;
+        height: 8rem;
+    }
+
+    @media (min-width: 516px) {
+        width: 30rem;
+    }
+`;
+
 //====== Categories ======//
 
 const CategoryContainer = styled.div`
@@ -138,5 +167,7 @@ export {
     IconWrapper,
     Title,
     ProductContainer,
-    ImgWrapper
+    ImgWrapper,
+    SelectionContainer,
+    SelectionWrapper
 };

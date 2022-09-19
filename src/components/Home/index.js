@@ -4,16 +4,18 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import Category from './Category';
 import Product from './Product';
+import Selection from './Selection';
 
 import { getHome } from '../../assets/services/request.js';
 
-import { Header, HomeContainer, HomeBody, CategoriesWrapper, ProductsWrapper, SectionTitle } from './StyledComponentsHome';
+import { Header, HomeContainer, HomeBody, CategoriesWrapper, ProductsWrapper, SectionTitle, SelectionContainer } from './StyledComponentsHome';
 
 import logo from '../../assets/logo.png'
 
 import UserContext from '../../contexts/UserContext';
 
 export default function Home() {
+    const [selections, setSelections] = useState([]);
     const [products, setProducts] = useState([]);
 
     const { user } = useContext(UserContext);
@@ -23,6 +25,7 @@ export default function Home() {
     useEffect(() => {
         getHome(user.token).then(res => {
             setProducts(res.data.products);
+            setSelections(res.data.selections);
         }).catch(e => {
             console.log(e);
             if (e.request.responseText === 'Unauthorized') {
@@ -44,6 +47,21 @@ export default function Home() {
             </Header>
 
             <HomeBody>
+                {selections.length > 0 ? (
+                    <>
+                        <SectionTitle>
+                            Seleções
+                        </SectionTitle>
+
+                        <SelectionContainer>
+                            {selections.map(selection => <Selection selectionObj={selection} />)}
+                        </SelectionContainer>
+                    </>
+                ) : (
+                    <></>
+                )}
+
+
                 <SectionTitle>
                     Categorias
                 </SectionTitle>
