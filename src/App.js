@@ -4,6 +4,7 @@ import GlobalStyle from "./GlobalStyle/GlobalStyle";
 import LoadingPage from "./components/LoagindPage";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import Cart from "./components/Cart";
 import Home from "./components/Home";
 import Selections from "./components/Home/Selections";
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/contact" element={<Contact />} /> */}
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/sign-up" element={<Signup />} />
+          <Route path="/my-cart" element={<Cart />} />
           <Route path="/home" element={<Home />} />
           <Route path="/category/:name" element={<Selections />} />
           <Route path="/selection/:id" element={<Selections />} />

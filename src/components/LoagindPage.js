@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import ImageHome from "./../assets/home-img.jpg";
+import ImageHomeMobile from "./../assets/woman-home-mobile.jpg";
 import styled from "styled-components";
 
 export default function Home() {
   return (
     <Background>
-      <Image src={ImageHome} alt="logo" />
+      <Image src={ImageHomeMobile} alt="logo" />
       <Text>Produtos de alta qualidade feitos para você</Text>
       <Link to="/sign-up">
         <Button>Next</Button>
@@ -18,6 +18,7 @@ const Image = styled.img`
   position: fixed;
   top: 0;
   left: 0;
+  object-fit: cover;
   width: 100%;
   animation: fadeIn 1s ease-in-out;
 
