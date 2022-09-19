@@ -38,7 +38,7 @@ export default function Signin() {
         setRequestMessage(res)
         setUserInformation(res.data);
         alert("Login realizado com sucesso");
-        navigate("/sign-in");
+        navigate("/home");
       })
       .catch((err) => {
         setRequestMessage(err)
