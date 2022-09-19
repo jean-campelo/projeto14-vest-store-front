@@ -10,9 +10,9 @@ import { BsFillExclamationTriangleFill, BsCheckCircleFill } from "react-icons/bs
 export default function Signin() {
   const navigate = useNavigate();
 
-  const URL = "http://localhost:5000/sign-in";
+  const URL = "https://vest-store.herokuapp.com/sign-in";
 
-  const { userInformation, setUserInformation } = useContext(UserContext);
+  const { user: userInformation, setUser: setUserInformation } = useContext(UserContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +38,6 @@ export default function Signin() {
         setRequestMessage(res)
         setUserInformation(res.data);
         alert("Login realizado com sucesso");
-        console.log(res.data);
         navigate("/home");
       })
       .catch((err) => {
@@ -148,7 +147,8 @@ const MainContainer = styled.div`
     }
     to {
       opacity: 1;
-    }}
+    }
+  }
 `;
 
 const ImageLogo = styled.img`
@@ -216,7 +216,8 @@ const TextLink = styled.p`
 
   &:hover {
     transform: scale(1.01);
-  }`;
+  }
+`;
 
 const Arrow = styled.div`
   display: flex;

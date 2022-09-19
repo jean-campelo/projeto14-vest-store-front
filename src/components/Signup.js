@@ -13,7 +13,7 @@ import {
 export default function Signup() {
   const navigate = useNavigate();
 
-  const URL = "http://localhost:5000/sign-up";
+  const URL = "https://vest-store.herokuapp.com/sign-up";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -155,6 +155,7 @@ const MainContainer = styled.div`
     to {
       opacity: 1;
     }
+  }
 `;
 
 const ImageLogo = styled.img`
@@ -222,6 +223,7 @@ const TextLink = styled.p`
 
   &:hover {
     transform: scale(1.01);
+  }
 `;
 
 const Arrow = styled.div`
