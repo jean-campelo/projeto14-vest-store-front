@@ -20,7 +20,7 @@ export default function Signin() {
   const [loading, setLoading] = useState(false);
   const [requestMessage, setRequestMessage] = useState({});
 
-  
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -38,7 +38,7 @@ export default function Signin() {
         setRequestMessage(res)
         setUserInformation(res.data);
         alert("Login realizado com sucesso");
-        navigate("/home");
+        navigate("/sign-in");
       })
       .catch((err) => {
         setRequestMessage(err)
@@ -51,49 +51,49 @@ export default function Signin() {
     let errorMessage = ""
 
     switch (requestMessage.response?.status) {
-        case 0:
-            errorMessage = "Erro ao logar. Por favor, tente novamente mais tarde"
-            break
-        case 401:
-            errorMessage = "Email ou senha incorreta"
-            break
-        case 422:
-            errorMessage = "Por favor, preencha os campos corretamente"
-            break
-        case 500:
-            errorMessage = "Tente novamente mais tarde"
-            break
-        default:
-            break
+      case 0:
+        errorMessage = "Erro ao logar. Por favor, tente novamente mais tarde"
+        break
+      case 401:
+        errorMessage = "Email ou senha incorreta"
+        break
+      case 422:
+        errorMessage = "Por favor, preencha os campos corretamente"
+        break
+      case 500:
+        errorMessage = "Tente novamente mais tarde"
+        break
+      default:
+        break
     }
     return errorMessage.length > 0 ? (
-        <ErrorMessage>
-            <BsFillExclamationTriangleFill /> {errorMessage}
-        </ErrorMessage>
+      <ErrorMessage>
+        <BsFillExclamationTriangleFill /> {errorMessage}
+      </ErrorMessage>
     ) : (
-        <></>
+      <></>
     )
-}
+  }
 
   function setSuccessContainerContent() {
     let successMessage = ""
 
-        switch (requestMessage?.status) {
-            case 200:
-            case 201:
-                successMessage =
-                    "Success! You'll be redirected back to the store now."
-                break
-            default:
-                break
-        }
-        return successMessage.length > 0 ? (
-            <SuccessMessage>
-                <BsCheckCircleFill /> {successMessage}
-            </SuccessMessage>
-        ) : (
-            <></>
-        )
+    switch (requestMessage?.status) {
+      case 200:
+      case 201:
+        successMessage =
+          "Success! You'll be redirected back to the store now."
+        break
+      default:
+        break
+    }
+    return successMessage.length > 0 ? (
+      <SuccessMessage>
+        <BsCheckCircleFill /> {successMessage}
+      </SuccessMessage>
+    ) : (
+      <></>
+    )
   }
 
   return (
@@ -120,8 +120,8 @@ export default function Signin() {
           placeholder="Senha"
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
-          {setErrorContainerContent()}
-          {setSuccessContainerContent()}
+        {setErrorContainerContent()}
+        {setSuccessContainerContent()}
         <Button type="submit">Entrar</Button>
       </form>
       <Link to="/sign-up" style={{ textDecoration: "none" }}>
