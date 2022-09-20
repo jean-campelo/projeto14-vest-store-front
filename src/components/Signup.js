@@ -23,7 +23,7 @@ export default function Signup() {
   const [trackingPassword, setTrackingPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { userInformation, setUserInformation } = useContext(UserContext);
+  const { user: userInformation, setUser: setUserInformation } = useContext(UserContext);
 
   function startTrackingPassword(e) {
     if (e.target.name === "password") {
@@ -61,7 +61,7 @@ export default function Signup() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    
+
     const body = {
       name,
       email,
@@ -71,7 +71,7 @@ export default function Signup() {
     axios
       .post(URL, body)
       .then((res) => {
-        userInformation(res.data);
+        setUserInformation(res.data);
         alert("Cadastro realizado com sucesso");
         setLoading(true);
         navigate("/sign-in");

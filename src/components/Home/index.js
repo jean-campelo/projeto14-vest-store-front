@@ -41,7 +41,7 @@ export default function Home() {
                     <User size={'2rem'} />
                 </Link>
                 <img src={logo} alt='Logo' width='35px' height='35px' />
-                <Link to='/'>
+                <Link to='/my-cart'>
                     <ShoppingCart size={'2rem'} />
                 </Link>
             </Header>

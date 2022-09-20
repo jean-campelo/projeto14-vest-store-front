@@ -20,7 +20,7 @@ export default function Cart() {
   const [checkout, setCheckout] = useState({});
 
   function sendOrder() {
-    const URL = "http://localhost:5000/checkout";
+    const URL = "https://vest-store.herokuapp.com/checkout";
     const config = {
       headers: {
         Authorization: `Bearer ${userInformation.user.token}`,
@@ -42,7 +42,7 @@ export default function Cart() {
   }
 
   function removeProduct(id) {
-    const URL = `http://localhost:5000/my-cart/${id}`;
+    const URL = `https://vest-store.herokuapp.com/my-cart/${id}`;
     const config = {
       headers: {
         Authorization: `Bearer ${userInformation.user.token}`,
@@ -58,7 +58,7 @@ export default function Cart() {
   }
 
   function getCart() {
-    const URL = "http://localhost:5000/my-cart";
+    const URL = "https://vest-store.herokuapp.com/my-cart";
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
